@@ -5,24 +5,25 @@
   	"license": "Apache-2.0",
   	"author": "Liam Labell <TheFallenSpirit>",
   	"description": "Kiyo Chan made for the Kiyo Community Discord server. Made with Discord.js and TypeScript.",
+	"packageManager": "yarn@3.3.1",
   	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/KiyoAnime/Bot.git"
- 	},
+  	  	"type": "git",
+  	  	"url": "git+https://github.com/KiyoAnime/Bot.git"
+  	},
   	"bugs": {
-		"url": "https://github.com/KiyoAnime/Bot/issues"
- 	},
- 	"homepage": "https://github.com/KiyoAnime/Bot#readme",
- 	"scripts": {
-		"build": "tsc; tsc-alias"
- 	},
- 	"dependencies": {
-		"discord.js": "^14.7.1"
-	  },
-	"devDependencies": {
-		"@types/node": "^18.11.18",
-		"tsc-alias": "^1.8.2",
-		"tsconfig-paths": "^4.1.2",
-		"typescript": "^4.9.4"
-	}
+  	  	"url": "https://github.com/KiyoAnime/Bot/issues"
+  	},
+  	"homepage": "https://github.com/KiyoAnime/Bot#readme",
+  	"scripts": {
+  	  	"build": "tsc; tsc-alias"
+  	},
+  	"dependencies": {
+  	  	"discord.js": "^14.7.1"
+  	},
+  	"devDependencies": {
+  	  	"@types/node": "^18.11.18",
+  	  	"tsc-alias": "^1.8.2",
+  	  	"tsconfig-paths": "^4.1.2",
+  	  	"typescript": "^4.9.4"
+  	}
 }
