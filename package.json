@@ -5,7 +5,7 @@
   	"license": "Apache-2.0",
   	"author": "Liam Labell <TheFallenSpirit>",
   	"description": "Kiyo Chan made for the Kiyo Community Discord server. Made with Discord.js and TypeScript.",
-	"packageManager": "yarn@3.3.1",
+  	"packageManager": "yarn@3.3.1",
   	"repository": {
   	  	"type": "git",
   	  	"url": "git+https://github.com/KiyoAnime/Bot.git"
