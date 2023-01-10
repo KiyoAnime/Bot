@@ -18,9 +18,11 @@
   	  	"build": "tsc; tsc-alias"
   	},
   	"dependencies": {
+  	  	"config": "^3.3.8",
   	  	"discord.js": "^14.7.1"
   	},
   	"devDependencies": {
+  	  	"@types/config": "^3.3.0",
   	  	"@types/node": "^18.11.18",
   	  	"tsc-alias": "^1.8.2",
   	  	"tsconfig-paths": "^4.1.2",

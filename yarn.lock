@@ -141,6 +141,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/config@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "@types/config@npm:3.3.0"
+  checksum: d9485041cfa05864d3b8095cf7b44fae910887f6782dc43ab1ba4ea78d9cdf4a8c9d697557318ede2b4b63a05b7f91e8571b8dbe048ad024e709d9e51e0487d8
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*, @types/node@npm:^18.11.18":
   version: 18.11.18
   resolution: "@types/node@npm:18.11.18"
@@ -365,6 +372,15 @@ __metadata:
   version: 0.0.1
   resolution: "concat-map@npm:0.0.1"
   checksum: 902a9f5d8967a3e2faf138d5cb784b9979bad2e6db5357c5b21c568df4ebe62bcb15108af1b2253744844eb964fc023fbd9afbbbb6ddd0bcc204c6fb5b7bf3af
+  languageName: node
+  linkType: hard
+
+"config@npm:^3.3.8":
+  version: 3.3.8
+  resolution: "config@npm:3.3.8"
+  dependencies:
+    json5: ^2.2.1
+  checksum: 8ae3b1a073eb32b8b8e8079f4f8874d170bed291df6e3d50d0333ef1524714e6fe051593298de565daa603dc11abda21dd480c9134dbf977caddb9821816c439
   languageName: node
   linkType: hard
 
@@ -789,7 +805,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:^2.2.2":
+"json5@npm:^2.2.1, json5@npm:^2.2.2":
   version: 2.2.3
   resolution: "json5@npm:2.2.3"
   bin:
@@ -802,7 +818,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "kiyo-chan@workspace:."
   dependencies:
+    "@types/config": ^3.3.0
     "@types/node": ^18.11.18
+    config: ^3.3.8
     discord.js: ^14.7.1
     tsc-alias: ^1.8.2
     tsconfig-paths: ^4.1.2
