@@ -5,14 +5,14 @@ import { GuildMember, AttachmentBuilder, TextChannel } from "discord.js";
 export default async (client: Client, member: GuildMember) => {
     if (member.guild.id !== client.config('guild')) return;
     registerFont('./src/assets/nunito.ttf', { family: 'Nunito' });
-    const background = await loadImage('./src/assets/welcome.png');
+    const background = await loadImage('./src/assets/welcome-banner.png');
     const avatar = await loadImage(member.user.displayAvatarURL({ size: 256, forceStatic: true, extension: 'png' }));
     const canvas = createCanvas(1456, 520);
     const ctx = canvas.getContext('2d');
 
     ctx.drawImage(background, 0, 0);
     ctx.fillStyle = 'rgba(0,0,0,0.5)';
-    ctx.fillRect(38, 38, canvas.width - 2 * 38, canvas.height - 2 * 38);
+    //ctx.fillRect(38, 38, canvas.width - 2 * 38, canvas.height - 2 * 38);
     ctx.save();
 
     ctx.beginPath();
