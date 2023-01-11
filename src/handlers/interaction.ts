@@ -3,7 +3,7 @@ import Command from "@/interfaces/Command";
 import { readdirSync } from "fs";
 
 export default (client: Client) => {
-    const path = `${__dirname}/../commands`;
+    const path = `${__dirname}/../interactions`;
     const types = readdirSync(path);
     for (const type of types) {
         const categories = readdirSync(`${path}/${type}`);

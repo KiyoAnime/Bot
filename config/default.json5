@@ -1,6 +1,13 @@
 {
+    guild: '1055795076099473448',
     brand: {
         name: 'Kiyo Chan',
         color: 0xE450B2
+    },
+    client: {
+        id: '809592287977930792'
+    },
+    channels: {
+        welcome: '1055821331255533598'
     }
 }

@@ -15,15 +15,23 @@
   	},
   	"homepage": "https://github.com/KiyoAnime/Bot#readme",
   	"scripts": {
-  	  	"build": "tsc; tsc-alias"
+  	  	"build": "tsc; tsc-alias",
+  	  	"start": "node -r dotenv/config build/index.js",
+  	  	"dev": "node -r ts-node/register -r dotenv/config -r tsconfig-paths/register index.ts --no-warnings",
+  	  	"cli:publish": "node -r ts-node/register -r dotenv/config -r tsconfig-paths/register ./src/console/publish.ts --no-warnings"
   	},
   	"dependencies": {
+  	  	"axios": "^1.2.2",
+  	  	"canvas": "^2.11.0",
   	  	"config": "^3.3.8",
-  	  	"discord.js": "^14.7.1"
+  	  	"dayjs": "^1.11.7",
+  	  	"discord.js": "^14.7.1",
+  	  	"dotenv": "^16.0.3"
   	},
   	"devDependencies": {
   	  	"@types/config": "^3.3.0",
   	  	"@types/node": "^18.11.18",
+  	  	"ts-node": "^10.9.1",
   	  	"tsc-alias": "^1.8.2",
   	  	"tsconfig-paths": "^4.1.2",
   	  	"typescript": "^4.9.4"

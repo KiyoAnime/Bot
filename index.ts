@@ -1,6 +1,7 @@
 import Client from "@/Client";
 import event from "@/handlers/event";
 import interaction from "@/handlers/interaction";
+import helpers from "@/helpers";
 import { GatewayIntentBits, Options } from "discord.js";
 
 const client = new Client({
@@ -19,6 +20,7 @@ const client = new Client({
 });
 
 event(client);
+helpers(client);
 interaction(client);
 
 client.login(process.env.BOT_TOKEN);
