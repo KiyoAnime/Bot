@@ -5,14 +5,15 @@ import { ActivityType, ChatInputCommandInteraction, Collection, EmbedBuilder, Gu
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const member = await getMember(interaction, interaction.options.getMember('member') || interaction.member);
-    // const data = {
-    //     joined: dayjs(member.joinedTimestamp).tz('Etc/UTC').format('dddd, MMMM Do, YYYY HH:mm (DD/MM/YY) (z)'),
-    //     created: dayjs(member.user.createdTimestamp).tz('Etc/UTC').format('dddd, MMMM Do, YYYY HH:mm (DD/MM/YY) (z)')
-    // };
+    const owner = member.user.id === interaction.guild?.ownerId;
+    const data = {
+        joined: dayjs(member.joinedTimestamp).tz('Etc/UTC').format('dddd, MMMM Do, YYYY HH:mm (DD/MM/YY) (z)'),
+        created: dayjs(member.user.createdTimestamp).tz('Etc/UTC').format('dddd, MMMM Do, YYYY HH:mm (DD/MM/YY) (z)')
+    };
 
     const embed = new EmbedBuilder({
         color: client.config('brand.color'),
-        title: `User Info - ${member.user.tag}`,
+        title: `User Info - ${member.user.tag} ${owner ? '(Server Owner)' : ''}`,
         thumbnail: { url: member.user.avatarURL()! },
         fields: [
             { name: 'ID:', value: member.user.id, inline: true },
@@ -21,8 +22,8 @@ export const run: ChatCmdRun = async (client, interaction) => {
             { name: 'Nickname:', value: member.nickname ? member.nickname : 'None' },
             { name: 'Custom Status:', value: getCustomStatus(member.presence!), inline: true },
             { name: 'Roles:', value: getRoles(interaction, member.roles.cache).map((r) => {return `<@&${r.id}>`}).join(', '), inline: false },
-            // { name: 'Joined:', value: data.joined, inline: false },
-            // { name: 'Created:', value: data.created, inline: false },
+            { name: 'Joined:', value: data.joined, inline: false },
+            { name: 'Created:', value: data.created, inline: false },
             { name: 'Acknowledgements:', value: getAcknowledgements(member), inline: false }
         ],
         footer: { text: `${client.config('brand.name')} Utility`, icon_url: client.user?.avatarURL()! },

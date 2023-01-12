@@ -11,8 +11,11 @@ export default async (client: Client, member: GuildMember) => {
     const ctx = canvas.getContext('2d');
 
     ctx.drawImage(background, 0, 0);
-    ctx.fillStyle = 'rgba(0,0,0,0.5)';
-    //ctx.fillRect(38, 38, canvas.width - 2 * 38, canvas.height - 2 * 38);
+    ctx.fillStyle = 'rgba(0,0,0,0.35)';
+    ctx.beginPath();
+    ctx.roundRect(38, 38, canvas.width - 2 * 38, canvas.height - 2 * 38, 100);
+    ctx.fill();
+    ctx.closePath();
     ctx.save();
 
     ctx.beginPath();
