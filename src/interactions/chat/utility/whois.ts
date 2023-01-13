@@ -5,6 +5,7 @@ import { ActivityType, ChatInputCommandInteraction, Collection, EmbedBuilder, Gu
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const member = await getMember(interaction, interaction.options.getMember('member') || interaction.member);
+    if (!member) return interaction.reply({ content: 'Invalid member specified.', ephemeral: true });
     const owner = member.user.id === interaction.guild?.ownerId;
     const data = {
         joined: dayjs(member.joinedTimestamp).tz('Etc/UTC').format('dddd, MMMM Do, YYYY HH:mm (DD/MM/YY) (z)'),
