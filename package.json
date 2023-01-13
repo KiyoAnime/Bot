@@ -17,6 +17,7 @@
   	"scripts": {
   	  	"build": "tsc; tsc-alias",
   	  	"start": "node -r dotenv/config build/index.js",
+		"cli:publish:prod": "NODE_ENV=production yarn run cli:publish",
   	  	"dev": "node -r ts-node/register -r dotenv/config -r tsconfig-paths/register index.ts --no-warnings",
   	  	"cli:publish": "node -r ts-node/register -r dotenv/config -r tsconfig-paths/register ./src/console/publish.ts --no-warnings"
   	},

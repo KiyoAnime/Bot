@@ -28,11 +28,11 @@ axios({
     data: commandData,
     headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bot ${process.env.BOT_TOKEN}`
+        Authorization: `Bot ${process.env.NODE_ENV === 'production' ? process.env.PROD_BOT_TOKEN : process.env.BOT_TOKEN}`
     }
 }).then((res) => {
     if (res.status === 200) {
-        return console.log('Successfully published all application commands.')
+        return console.log(`Successfully published all application commands to client ${config.get('client.id')}`);
     } else {
         return console.log('An unexpected error has occured.');
     };

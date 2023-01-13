@@ -3,5 +3,5 @@ import { ActivityType } from "discord.js";
 
 export default (client: Client) => {
     console.log('Client is ready');
-    client.user?.setPresence({ status: 'idle', activities: [{ type: ActivityType.Watching, name: 'KiyoHentai.xxx' }] });
+    client.user?.setPresence({ status: 'idle', activities: [{ type: ActivityType.Watching, name: 'Kiyo Development' }] });
 };
