@@ -18,6 +18,6 @@ export const run: ChatCmdRun = (client, interaction) => {
 export const info: CommandInfo = {
     type: 1,
 	name: 'flip',
-	description: 'Flip a coin.',
-	dm_permission: true
+	dm_permission: true,
+	description: 'Flip a coin.'
 };

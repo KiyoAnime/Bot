@@ -11,6 +11,6 @@ export const run: ChatCmdRun = async (client, interaction) => {
 export const info: CommandInfo = {
     type: 1,
 	name: 'dog',
-	description: 'Get a random dog image.',
-	dm_permission: true
+	dm_permission: true,
+	description: 'Get a random dog image.'
 };

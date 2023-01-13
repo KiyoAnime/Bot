@@ -16,6 +16,6 @@ export const run: ChatCmdRun = async (client, interaction) => {
 export const info: CommandInfo = {
     type: 1,
     name: 'ping',
-    description: 'Ping pong 🏓',
-    dm_permission: true
+    dm_permission: true,
+    description: 'Ping pong 🏓'
 };

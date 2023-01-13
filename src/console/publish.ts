@@ -38,5 +38,5 @@ axios({
     };
 }).catch((err) => {
     console.log('An unexpected error has occured.');
-    return console.log(err);
+    return console.log(err.response.data);
 });
