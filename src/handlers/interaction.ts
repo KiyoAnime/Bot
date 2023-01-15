@@ -1,6 +1,7 @@
 import Client from "@/Client";
 import Command from "@/interfaces/Command";
 import { readdirSync } from "fs";
+import { grey as gr, green as g } from 'chalk';
 
 export default (client: Client) => {
     const path = `${__dirname}/../interactions`;
@@ -15,5 +16,5 @@ export default (client: Client) => {
             };
         };
     };
-    console.log('All interactions loaded.');
+    console.log(`${gr.bold('[')}${g.bold('HANDLER')}${gr.bold(']')} All interactions have successfully loaded.`);
 };

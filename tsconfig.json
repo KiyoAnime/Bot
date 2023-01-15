@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
         "strict": true,
-        "lib": ["ES2020"],
+        "baseUrl": ".",
         "outDir": "build",
         "target": "ES2020",
         "module": "NodeNext",
         "skipLibCheck": true,
         "esModuleInterop": true,
-        "moduleResolution": "node",
+        "moduleResolution": "Node",
         "paths": {
             "@/*": ["./src/*"]
         }
