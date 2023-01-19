@@ -1,12 +1,17 @@
 import { ChatCmdRun, CommandInfo } from "@/Interfaces";
-import embedsRaw from "@/library/embeds";
+import rawEmbeds from "@/library/embeds";
 import permissions from "@/library/permissions";
 import { EmbedBuilder, TextChannel } from "discord.js";
 
 export const run: ChatCmdRun = (client, interaction) => {
     const channel = interaction.options.getChannel('channel') as TextChannel;
     const id = interaction.options.getString('id')!;
-    const embeds = embedsRaw(client, interaction);
+    const embeds = rawEmbeds(client, interaction);
+    const rawEmbed = embeds[id];
+    if (!rawEmbed) return interaction.reply({ content: 'Invalid embed specified.', ephemeral: true });
+    const embed = new EmbedBuilder(rawEmbed);
+    channel.send({ embeds: [embed] });
+    interaction.reply({ content: 'Successfully sent embed.' });
 };
 
 export const info: CommandInfo = {
@@ -29,4 +34,4 @@ export const info: CommandInfo = {
             description: 'The id of the embed you wish to send.'
         }
     ]
-}
+};
