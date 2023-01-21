@@ -1,11 +1,15 @@
 import { ChatCmdRun, CommandInfo } from "@/Interfaces";
 import permissions from "@/library/permissions";
-import { TextChannel } from "discord.js";
+import { ChannelType, PermissionsBitField, TextChannel, ThreadChannel } from "discord.js";
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const message = interaction.options.getString('message')!;
-    const channel = interaction.options.getChannel('channel') as TextChannel;
-    await channel.send({ content: message });
+    const channel = interaction.options.getChannel('channel')!;
+    const channelTypes = [ChannelType.GuildText, ChannelType.PublicThread, ChannelType.PrivateThread];
+    if (!channelTypes.includes(channel.type)) return interaction.reply({ content: `Invalid channel type. I cannot speak in ${channel.type} channels.`, ephemeral: true });
+    const newChannel = channel as TextChannel|ThreadChannel;
+    if (newChannel.permissionsFor(interaction.guild?.roles.everyone!).missing(PermissionsBitField.Flags.SendMessages)) return interaction.reply({ content: 'I do not have permission to speak in this channel. Make sure it is a public channel.', ephemeral: true });
+    await newChannel.send({ content: message });
     interaction.reply({ content: 'Successfully sent message.' });
 };
 
