@@ -5,10 +5,10 @@ import { ChannelType, PermissionsBitField, TextChannel, ThreadChannel } from "di
 export const run: ChatCmdRun = async (client, interaction) => {
     const message = interaction.options.getString('message')!;
     const channel = interaction.options.getChannel('channel')!;
-    const channelTypes = [ChannelType.GuildText, ChannelType.PublicThread, ChannelType.PrivateThread];
-    if (!channelTypes.includes(channel.type)) return interaction.reply({ content: `Invalid channel type. I cannot speak in ${channel.type} channels.`, ephemeral: true });
+    const types = [ChannelType.GuildText, ChannelType.PublicThread, ChannelType.PrivateThread];
+    if (!types.includes(channel.type)) return interaction.reply({ content: `Invalid channel type. I cannot speak in that channel. I can only speak in text channels.`, ephemeral: true });
     const newChannel = channel as TextChannel|ThreadChannel;
-    if (newChannel.permissionsFor(interaction.guild?.roles.everyone!).missing(PermissionsBitField.Flags.SendMessages)) return interaction.reply({ content: 'I do not have permission to speak in this channel. Make sure it is a public channel.', ephemeral: true });
+    if (!newChannel.permissionsFor(interaction.guild?.members.me!).has(PermissionsBitField.Flags.SendMessages)) return interaction.reply({ content: 'I do not have permission to speak in this channel. I can only speak in public channels.', ephemeral: true });
     await newChannel.send({ content: message });
     interaction.reply({ content: 'Successfully sent message.' });
 };
