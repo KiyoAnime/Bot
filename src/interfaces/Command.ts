@@ -15,7 +15,17 @@ export interface CommandInfo {
     default_member_permissions?: number;
 }
 
-interface Options {
+type Options = {
+    type: 1|2;
+    name: string;
+    required?: boolean;
+    choices?: Choice[];
+    min_value?: number;
+    max_value?: number;
+    options?: Options[];
+    description: string;
+    channel_types?: ChannelType[];
+} | {
     name: string;
     required: boolean;
     choices?: Choice[];
