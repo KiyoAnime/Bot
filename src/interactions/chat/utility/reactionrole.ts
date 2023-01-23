@@ -96,6 +96,12 @@ export const info: CommandInfo = {
 					name: 'group',
                     required: true,
 					description: 'The ID of the group to send.'
+				},
+				{
+					type: 5,
+					required: true,
+					name: 'multiple',
+					description: 'If users should be able to select multiple roles.'
 				}
 			]
 		},
