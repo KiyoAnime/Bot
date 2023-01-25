@@ -60,16 +60,16 @@ export const info: CommandInfo = {
 					description: 'The description of the reaction role.'
 				},
 				{
-					type: 3,
-					name: 'emoji',
-					required: false,
-					description: 'The emoji to display with the role.'
-				},
-				{
 					type: 8,
 					name: 'role',
                     required: true,
 					description: 'The role to use for the reaction role.'
+				},
+				{
+					type: 3,
+					name: 'emoji',
+					required: false,
+					description: 'The emoji to display with the role.'
 				}
 			]
 		},
