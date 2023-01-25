@@ -44,6 +44,7 @@ export const roles: ChatCmdRun = async (client, interaction) => {
                 role: interaction.options.getRole('role', true).id,
                 group: interaction.options.getInteger('group'),
                 name: interaction.options.getString('name'),
+                emoji: interaction.options.getString('emoji'),
                 description: interaction.options.getString('description')
             });
             interaction.reply({ content: `Successfully created reaction role ${cRole.name} (${cRole._id}).` });
@@ -96,7 +97,6 @@ export const roles: ChatCmdRun = async (client, interaction) => {
                 footer: { text: `${client.config('brand.name')} Utility`, icon_url: client.user?.avatarURL()! },
                 timestamp: Date.now()
             })]});
-            await interaction.deleteReply();
             await interaction.followUp({ content: 'Successfully sent embed.' });
             break;
     };
