@@ -62,7 +62,7 @@ export const info: CommandInfo = {
 				{
 					type: 3,
 					name: 'emoji',
-					required: true,
+					required: false,
 					description: 'The emoji to display with the role.'
 				},
 				{

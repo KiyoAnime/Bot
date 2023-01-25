@@ -44,7 +44,7 @@ export const roles: ChatCmdRun = async (client, interaction) => {
                 role: interaction.options.getRole('role', true).id,
                 group: interaction.options.getInteger('group'),
                 name: interaction.options.getString('name'),
-                emoji: interaction.options.getString('emoji'),
+                emoji: interaction.options.getString('emoji') ? interaction.options.getString('emoji') : undefined,
                 description: interaction.options.getString('description')
             });
             interaction.reply({ content: `Successfully created reaction role ${cRole.name} (${cRole._id}).` });
