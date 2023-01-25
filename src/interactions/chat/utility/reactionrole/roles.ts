@@ -72,6 +72,7 @@ export const roles: ChatCmdRun = async (client, interaction) => {
 
         case 'output':
             const oId = interaction.options.getInteger('group', true);
+            const multiple = interaction.options.getBoolean('multiple', true);
             const oGroup = await RRG.findById(oId);
             if (!oGroup) return interaction.reply({ content: 'The specified group does not exist.' });
             const channel = interaction.options.getChannel('channel', true);
@@ -86,7 +87,7 @@ export const roles: ChatCmdRun = async (client, interaction) => {
                 customId: `rr.group.${oGroup._id}`,
                 options: components,
                 minValues: 1,
-                maxValues: components.length
+                maxValues: multiple ? components.length : 1
             })]});
             await (channel as TextChannel).send({ components: [oRow], embeds: [new EmbedBuilder({
                 title: oGroup.name,
