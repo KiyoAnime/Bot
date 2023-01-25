@@ -39,14 +39,14 @@ export const roles: ChatCmdRun = async (client, interaction) => {
         case 'create':
             if (!await RRG.exists({ _id: interaction.options.getInteger('group') })) return interaction.reply({ content: 'The specified group does not exist.' });
             const cId = genId();
-            await RR.create({
+            const cRole = await RR.create({
                 _id: cId,
                 role: interaction.options.getRole('role', true).id,
                 group: interaction.options.getInteger('group'),
                 name: interaction.options.getString('name'),
                 description: interaction.options.getString('description')
             });
-            interaction.reply({ content: 'Successfully created reaction role.' });
+            interaction.reply({ content: `Successfully created reaction role ${cRole.name} (${cRole._id}).` });
             break;
 
         case 'delete':

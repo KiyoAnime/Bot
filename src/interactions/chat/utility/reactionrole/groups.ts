@@ -42,14 +42,14 @@ export const groups: ChatCmdRun = async (client, interaction) => {
             }
             if (!validateHex(interaction.options.getString('color', true))) return interaction.reply({ content: 'Invalid color specified.' });
             const cId = genId();
-            await RRG.create({
+            const cGroup = await RRG.create({
                 _id: cId,
                 name: interaction.options.getString('name', true),
                 color: interaction.options.getString('color', true),
                 image: cImage,
                 description: interaction.options.getString('description', true)
             });
-            interaction.reply({ content: 'Successfully created group.' });
+            interaction.reply({ content: `Successfully created group ${cGroup.name} (${cGroup._id}).` });
             break;
 
         case 'delete':
