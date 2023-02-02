@@ -16,7 +16,7 @@ export const info: CommandInfo = {
 		{
 			type: 6,
 			name: 'member',
-            required: true,
+            required: false,
 			description: 'The member to get avatar for.'
 		}
 	]
