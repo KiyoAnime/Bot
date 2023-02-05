@@ -4,7 +4,10 @@ import { GuildMember, AttachmentBuilder, TextChannel } from "discord.js";
 
 export default async (client: Client, member: GuildMember) => {
     if (member.guild.id !== client.config('guild')) return;
+    const role = member.guild.roles.cache.get(client.config('roles.member'));
+    if (role) await member.roles.add(role, 'Automated Action: Autorole');
     registerFont('./src/assets/nunito.ttf', { family: 'Nunito' });
+    
     const background = await loadImage('./src/assets/welcome-banner.png');
     const avatar = await loadImage(member.user.displayAvatarURL({ size: 256, forceStatic: true, extension: 'png' }));
     const canvas = createCanvas(1456, 520);
