@@ -20,11 +20,12 @@ export default async (client: Client, data: Data): Promise<number> => {
         user: data.user.id,
         type: data.type,
         reason: data.reason,
+        duration: data.duration,
         moderator: data.moderator.id
     });
     const guild = client.guilds.cache.get(client.config('guild'));
     const logsEmbed = new EmbedBuilder({
-        author: { name: `Infraction | ${data.type.toLowerCase().charAt(0).toUpperCase() + data.type.toLowerCase().slice(1)} | ${inf._id}`, icon_url: data.user.avatarURL()! },
+        author: { name: `Infraction | ${data.type.toLowerCase().charAt(0).toUpperCase() + data.type.toLowerCase().slice(1)} | ${inf._id}`, icon_url: data.user.displayAvatarURL({ forceStatic: true }) },
         color: resolveColor(getColor(data.type) as ColorResolvable),
         fields: [
             { name: 'User:', value: `<@!${data.user.id}> (${data.user.id})`, inline: true },
