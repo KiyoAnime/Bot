@@ -6,31 +6,29 @@ import getMember from "@/utilities/getMember";
 export const run: ChatCmdRun = async (client, interaction) => {
     const member = await getMember(interaction, interaction.options.getMember('member'));
     if (!member) return interaction.reply({ content: 'Invalid member specified.', ephemeral: true });
-    if (!member.kickable) return interaction.reply({ content: 'I cannot moderate that member.' });
     const reason = interaction.options.getString('reason', true);
-    await infraction(client, { type: 'KICK', user: member.user, reason: reason, moderator: interaction.user });
-    await member.kick(`Moderator: ${interaction.user.tag} | Reason: ${reason}`);
-    interaction.reply({ content: `Successfully kicked ${member.user.tag}.` });
+    await infraction(client, { type: 'WARN', user: member.user, reason: reason, moderator: interaction.user });
+    interaction.reply({ content: `Successfully warned ${member.user.tag}.` });
 };
 
 export const info: CommandInfo = {
     type: 1,
-    name: 'kick',
+    name: 'warn',
     dm_permission: false,
-    description: 'Kick a member.',
-    default_member_permissions: permissions.kickMembers,
+    description: 'Warn a member.',
+    default_member_permissions: permissions.manageMessages,
     options: [
         {
             type: 6,
             name: 'member',
             required: true,
-            description: 'The member to kick.'
+            description: 'The member to warn.'
         },
         {
             type: 3,
             name: 'reason',
             required: true,
-            description: 'Reason for the kick.'
+            description: 'Reason for the warn.'
         }
     ]
 };

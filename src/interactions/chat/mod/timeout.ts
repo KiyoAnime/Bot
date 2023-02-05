@@ -1,4 +1,5 @@
 import { ChatCmdRun, CommandInfo } from "@/Interfaces";
+import infraction from "@/library/infraction";
 import permissions from "@/library/permissions";
 import getMember from "@/utilities/getMember";
 import ms from "ms";
@@ -7,10 +8,11 @@ export const run: ChatCmdRun = async (client, interaction) => {
     const member = await getMember(interaction, interaction.options.getMember('member'));
     if (!member) return interaction.reply({ content: 'Invalid member specified.', ephemeral: true });
     if (!member.moderatable) return interaction.reply({ content: 'I cannot moderate that member.' });
-    const length = interaction.options.getString('length');
-    const reason = interaction.options.getString('reason');
+    const length = interaction.options.getString('length', true);
+    const reason = interaction.options.getString('reason', true);
+    await infraction(client, { type: 'TIMEOUT', user: member.user, reason: reason, moderator: interaction.user, duration: ms(ms(length), { long: true }) });
     await member.timeout(ms(length!), `Moderator: ${interaction.user.tag} | Reason: ${reason}`);
-    interaction.reply({ content: `Successfully timed-out ${member.user.tag} for ${ms(ms(length!), { long: true })}.` });
+    interaction.reply({ content: `Successfully timed-out ${member.user.tag} for ${ms(ms(length), { long: true })}.` });
 };
 
 export const info: CommandInfo = {
