@@ -7,11 +7,12 @@ import { EmbedBuilder } from "discord.js";
 export const run: ChatCmdRun = async (client, interaction) => {
     switch (interaction.options.getSubcommand(true)) {
         case 'list':
+            await interaction.deferReply();
             const lUserId = interaction.options.getString('user', true);
             const lInf = await Infraction.find({ user: lUserId });
-            if (!lInf[0]) return interaction.reply({ content: 'The specified user has no infractions.' });
+            if (!lInf[0]) return interaction.editReply({ content: 'The specified user has no infractions.' });
             const lUser = await interaction.guild?.members.cache.get(lUserId);
-            interaction.reply({ embeds: [new EmbedBuilder({
+            interaction.editReply({ embeds: [new EmbedBuilder({
                 author: { name: `${lUser ? lUser.user.tag : lUserId} - Infractions`, icon_url: lUser?.displayAvatarURL({ forceStatic: true }) },
                 color: client.config('brand.color'),
                 description: lInf.map((i) => { return `**ID:** ${i._id} - **Type:** ${i.type} - **Mod:** ${interaction.guild?.members.cache.get(i.moderator) ? interaction.guild?.members.cache.get(i.moderator)?.user.tag : ''} (${i.moderator})` }).join('\n'),
@@ -21,11 +22,12 @@ export const run: ChatCmdRun = async (client, interaction) => {
             break;
 
         case 'view':
+            await interaction.deferReply();
             const vInf = await Infraction.findById(interaction.options.getInteger('id', true));
-            if (!vInf) return interaction.reply({ content: 'The specified infraction does not exist.', ephemeral: true });
+            if (!vInf) return interaction.editReply({ content: 'The specified infraction does not exist.' });
             const vUser = await interaction.guild?.members.cache.get(vInf.user);
             const vMod = await interaction.guild?.members.cache.get(vInf.moderator);
-            interaction.reply({ embeds: [new EmbedBuilder({
+            interaction.editReply({ embeds: [new EmbedBuilder({
                 title: `Infraction: ${vInf._id}`,
                 color: client.config('brand.color'),
                 description: `
