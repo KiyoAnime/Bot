@@ -2,12 +2,17 @@ import { ChatCmdRun, CommandInfo } from '@/Interfaces';
 import infraction from '@/library/infraction';
 import permissions from '@/library/permissions';
 import getMember from '@/utilities/getMember';
+import { PermissionsBitField } from 'discord.js';
 import ms from 'ms';
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const member = await getMember(interaction, interaction.options.getMember('member'));
     if (!member) return interaction.reply({ content: 'Invalid member specified.', ephemeral: true });
     if (!member.bannable) return interaction.reply({ content: 'I cannot moderate that member.' });
+    if (
+        member.permissions.has(PermissionsBitField.Flags.ModerateMembers) &&
+        !(interaction.member?.permissions as Readonly<PermissionsBitField>).has(PermissionsBitField.Flags.Administrator)
+    ) return interaction.reply({ content: 'You do not have permission to ban this member.' });
     const reason = interaction.options.getString('reason', true);
     const deleteMsg = interaction.options.getString('delete');
     await infraction(client, { type: 'BAN', user: member.user, reason: reason, moderator: interaction.user });
