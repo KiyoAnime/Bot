@@ -4,6 +4,7 @@ import { EmbedBuilder, Message, PartialMessage, TextChannel } from 'discord.js';
 export default (client: Client, message: Message | PartialMessage) => {
     if (message.partial) return;
     if (message.embeds[0]) return;
+    if (message.author.bot) return;
     const embed = new EmbedBuilder({
         author: { name: 'Message Deleted', icon_url: message.member?.displayAvatarURL({ forceStatic: true }) },
         color: client.config('brand.color'),
