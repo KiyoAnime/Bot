@@ -1,5 +1,5 @@
-import Client from "@/Client";
-import { ActivityType } from "discord.js";
+import Client from '@/Client';
+import { ActivityType } from 'discord.js';
 import { grey as g, magentaBright as m } from 'chalk';
 
 export default (client: Client) => {

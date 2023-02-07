@@ -1,8 +1,8 @@
-import { ChatCmdRun, CommandInfo } from "@/Interfaces";
-import permissions from "@/library/permissions";
-import Infraction from "@/models/Infraction";
-import dayjs from "dayjs";
-import { EmbedBuilder } from "discord.js";
+import { ChatCmdRun, CommandInfo } from '@/Interfaces';
+import permissions from '@/library/permissions';
+import Infraction from '@/models/Infraction';
+import dayjs from 'dayjs';
+import { EmbedBuilder } from 'discord.js';
 
 export const run: ChatCmdRun = async (client, interaction) => {
     switch (interaction.options.getSubcommand(true)) {
@@ -12,13 +12,14 @@ export const run: ChatCmdRun = async (client, interaction) => {
             const lInf = await Infraction.find({ user: lUserId });
             if (!lInf[0]) return interaction.editReply({ content: 'The specified user has no infractions.' });
             const lUser = await interaction.guild?.members.cache.get(lUserId);
+            // prettier-ignore
             interaction.editReply({ embeds: [new EmbedBuilder({
                 author: { name: `${lUser ? lUser.user.tag : lUserId} - Infractions`, icon_url: lUser?.displayAvatarURL({ forceStatic: true }) },
                 color: client.config('brand.color'),
                 description: lInf.map((i) => { return `**ID:** ${i._id} - **Type:** ${i.type} - **Mod:** ${interaction.guild?.members.cache.get(i.moderator) ? interaction.guild?.members.cache.get(i.moderator)?.user.tag : ''} (${i.moderator})` }).join('\n'),
                 footer: { text: `${client.config('brand.name')} Moderation`, icon_url: client.user?.avatarURL()! },
                 timestamp: Date.now()
-            })] });
+            })]});
             break;
 
         case 'view':
@@ -27,22 +28,21 @@ export const run: ChatCmdRun = async (client, interaction) => {
             if (!vInf) return interaction.editReply({ content: 'The specified infraction does not exist.' });
             const vUser = await interaction.guild?.members.cache.get(vInf.user);
             const vMod = await interaction.guild?.members.cache.get(vInf.moderator);
+            // prettier-ignore
             interaction.editReply({ embeds: [new EmbedBuilder({
                 title: `Infraction: ${vInf._id}`,
                 color: client.config('brand.color'),
-                description: `
-                **User:** ${vUser ? `${vUser.user.tag} (${vInf.user})` : vInf.user }
-                **Moderator:** ${vMod ? `${vMod.user.tag} (${vInf.moderator})`: vInf.moderator }`,
+                description: `**User:** ${vUser ? `${vUser.user.tag} (${vInf.user})` : vInf.user}\n**Moderator:** ${vMod ? `${vMod.user.tag} (${vInf.moderator})` : vInf.moderator}`,
                 fields: [
                     { name: 'Reason:', value: vInf.reason },
                     { name: 'Duration:', value: vInf.duration ? vInf.duration : 'N/A' },
-                    { name: 'Issued On:', value: dayjs(vInf.createdAt).tz('Etc/UTC').format('MMMM Do, YYYY HH:mm (DD/MM/YY) (z)') } 
+                    { name: 'Issued On:', value: dayjs(vInf.createdAt).tz('Etc/UTC').format('MMMM Do, YYYY HH:mm (DD/MM/YY) (z)') }
                 ],
                 footer: { text: `${client.config('brand.name')} Moderation`, icon_url: client.user?.avatarURL()! },
                 timestamp: Date.now()
-            })] });
+            })]});
             break;
-    };
+    }
 };
 
 export const info: CommandInfo = {
@@ -92,4 +92,4 @@ export const info: CommandInfo = {
             ]
         }
     ]
-}
+};

@@ -1,7 +1,7 @@
-import { CommandInfo, UserCmdRun } from "@/Interfaces";
+import { CommandInfo, UserCmdRun } from '@/Interfaces';
 
 export const run: UserCmdRun = (client, interaction) => {
-    const avatar = interaction.targetUser.displayAvatarURL({ size: 512 })
+    const avatar = interaction.targetUser.displayAvatarURL({ size: 512 });
     interaction.reply({ content: avatar });
 };
 

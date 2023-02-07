@@ -1,23 +1,23 @@
-import { ChatCmdRun, CommandInfo } from "@/Interfaces";
+import { ChatCmdRun, CommandInfo } from '@/Interfaces';
 
 export const run: ChatCmdRun = (client, interaction) => {
-	const result = Math.floor(Math.random() * 2) + 1;
-	let msg: string = '';
-	switch (result) {
-		case 1:
-			msg = 'Heads!';
-			break;
+    const result = Math.floor(Math.random() * 2) + 1;
+    let msg: string = '';
+    switch (result) {
+        case 1:
+            msg = 'Heads!';
+            break;
 
-		case 2:
-			msg = 'Tails!';
-			break;
-	}
-	interaction.reply({ content: msg });
+        case 2:
+            msg = 'Tails!';
+            break;
+    }
+    interaction.reply({ content: msg });
 };
 
 export const info: CommandInfo = {
     type: 1,
-	name: 'flip',
-	dm_permission: true,
-	description: 'Flip a coin.'
+    name: 'flip',
+    dm_permission: true,
+    description: 'Flip a coin.'
 };

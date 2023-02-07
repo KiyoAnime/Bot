@@ -1,7 +1,7 @@
-import { ChatCmdRun, CommandInfo } from "@/Interfaces";
-import getMember from "@/utilities/getMember";
-import dayjs from "dayjs";
-import { ActivityType, ChatInputCommandInteraction, Collection, EmbedBuilder, GuildMember, PermissionsBitField, Presence, Role } from "discord.js";
+import { ChatCmdRun, CommandInfo } from '@/Interfaces';
+import getMember from '@/utilities/getMember';
+import dayjs from 'dayjs';
+import { ActivityType, ChatInputCommandInteraction, Collection, EmbedBuilder, GuildMember, PermissionsBitField, Presence, Role } from 'discord.js';
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const member = await getMember(interaction, interaction.options.getMember('member') || interaction.member);
@@ -11,7 +11,7 @@ export const run: ChatCmdRun = async (client, interaction) => {
         joined: dayjs(member.joinedTimestamp).tz('Etc/UTC').format('dddd, MMMM Do, YYYY HH:mm (DD/MM/YY) (z)'),
         created: dayjs(member.user.createdTimestamp).tz('Etc/UTC').format('dddd, MMMM Do, YYYY HH:mm (DD/MM/YY) (z)')
     };
-
+    // prettier-ignore
     const embed = new EmbedBuilder({
         color: client.config('brand.color'),
         title: `User Info - ${member.user.tag} ${owner ? '(Server Owner)' : ''}`,
@@ -22,7 +22,7 @@ export const run: ChatCmdRun = async (client, interaction) => {
             { name: 'Activity:', value: getActivity(member.presence!), inline: true },
             { name: 'Nickname:', value: member.nickname ? member.nickname : 'None' },
             { name: 'Custom Status:', value: getCustomStatus(member.presence!), inline: true },
-            { name: 'Roles:', value: getRoles(interaction, member.roles.cache).map((r) => {return `<@&${r.id}>`}).join(', '), inline: false },
+            { name: 'Roles:', value: getRoles(interaction, member.roles.cache).map((r) => { return `<@&${r.id}>` }).join(', '), inline: false },
             { name: 'Joined:', value: data.joined, inline: false },
             { name: 'Created:', value: data.created, inline: false },
             { name: 'Acknowledgements:', value: getAcknowledgements(member), inline: false }
@@ -30,7 +30,7 @@ export const run: ChatCmdRun = async (client, interaction) => {
         footer: { text: `${client.config('brand.name')} Utility`, icon_url: client.user?.avatarURL()! },
         timestamp: Date.now()
     });
-    await interaction.reply({ embeds: [embed] });
+    interaction.reply({ embeds: [embed] });
 };
 
 export const info: CommandInfo = {
@@ -49,8 +49,8 @@ export const info: CommandInfo = {
 };
 
 interface CustomStatus {
-    text: undefined|string;
-    emoji: undefined|string;
+    text: undefined | string;
+    emoji: undefined | string;
 }
 
 const getRoles = (interaction: ChatInputCommandInteraction, roles: Collection<string, Role>): Collection<string, Role> => {
@@ -108,5 +108,5 @@ const getActivity = (presence: Presence): string => {
         default:
             return 'None';
             break;
-    };
+    }
 };

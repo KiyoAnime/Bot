@@ -8,4 +8,4 @@ export default class Client extends DiscordClient {
     public config = (key: string): any => {
         return config.get(key);
     };
-};
+}

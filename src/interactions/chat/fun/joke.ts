@@ -1,12 +1,12 @@
-import { ChatCmdRun, CommandInfo } from "@/Interfaces";
-import { EmbedBuilder } from "discord.js";
-import axios from "axios";
+import { ChatCmdRun, CommandInfo } from '@/Interfaces';
+import { EmbedBuilder } from 'discord.js';
+import axios from 'axios';
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const category = interaction.options.getString('category');
     const res = await axios.get(`https://v2.jokeapi.dev/joke/${category ? category : 'Miscellaneous'}?blacklistFlags=religious,racist,sexist`);
     const categoryName = (res.data.category as string).replace('Misc', 'Random');
-    
+
     if (res.data.type === 'twopart') {
         const embed = new EmbedBuilder({
             title: `${categoryName} Joke`,
@@ -25,7 +25,7 @@ export const run: ChatCmdRun = async (client, interaction) => {
             timestamp: Date.now()
         });
         await interaction.reply({ embeds: [embed] });
-    };
+    }
 };
 
 export const info: CommandInfo = {

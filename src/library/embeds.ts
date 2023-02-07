@@ -1,8 +1,8 @@
-import { APIEmbed, ChatInputCommandInteraction, EmbedData } from "discord.js";
-import Client from "@/Client";
+import { APIEmbed, ChatInputCommandInteraction, EmbedData } from 'discord.js';
+import Client from '@/Client';
 
 interface Embed {
-    [id: string]: APIEmbed|EmbedData|undefined;
+    [id: string]: APIEmbed | EmbedData | undefined;
 }
 
 export default (client: Client, interaction: ChatInputCommandInteraction): Embed => {
@@ -39,7 +39,7 @@ export default (client: Client, interaction: ChatInputCommandInteraction): Embed
                 },
                 {
                     name: '(6) No doxing or threatening to dox under any circumstances.',
-                    value: 'This includes releasing another user\'s personal information or threatening to. This is a severe offense and will be treated as such.'
+                    value: "This includes releasing another user's personal information or threatening to. This is a severe offense and will be treated as such."
                 },
                 {
                     name: '(7) Keep messages in their related channels.',
@@ -92,5 +92,5 @@ export default (client: Client, interaction: ChatInputCommandInteraction): Embed
             footer: { text: `${client.config('brand.name')} Utility`, icon_url: client.user?.avatarURL()! },
             timestamp: Date.now()
         }
-    }
+    };
 };

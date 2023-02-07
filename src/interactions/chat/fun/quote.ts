@@ -1,5 +1,5 @@
-import { CommandInfo, ChatCmdRun } from "@/Interfaces";
-import axios from "axios";
+import { CommandInfo, ChatCmdRun } from '@/Interfaces';
+import axios from 'axios';
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const res = await axios.get('https://zenquotes.io/api/quotes');

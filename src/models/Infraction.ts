@@ -1,4 +1,4 @@
-import { model, Model, Schema } from "mongoose";
+import { model, Model, Schema } from 'mongoose';
 
 interface InfractionI {
     _id: number;
@@ -7,17 +7,18 @@ interface InfractionI {
     createdAt: Date;
     duration?: string;
     moderator: string;
-    type: 'BAN'|'WARN'|'KICK'|'TIMEOUT'|'SOFT-BAN';
+    type: 'BAN' | 'WARN' | 'KICK' | 'TIMEOUT' | 'SOFT-BAN';
 }
 
 export type Infraction = Model<InfractionI>;
+// prettier-ignore
 const infractionSchema = new Schema<InfractionI, Infraction>({
     _id: Number,
     type: { required: true, type: String },
     user: { required: true, type: String },
     reason: { required: true, type: String },
     duration: { required: false, type: String },
-    moderator: { required: true, type: String },
+    moderator: { required: true, type: String }
 }, { timestamps: true });
 
 export default model('infractions', infractionSchema);

@@ -1,7 +1,7 @@
-import dayjs from "@/helpers/dayjs";
-import { Command, CommandInfo } from "@/Interfaces";
-import axios from "axios";
-import { readdirSync } from "node:fs";
+import dayjs from '@/helpers/dayjs';
+import { Command, CommandInfo } from '@/Interfaces';
+import axios from 'axios';
+import { readdirSync } from 'node:fs';
 import config from 'config';
 
 console.clear();
@@ -18,9 +18,9 @@ for (const type of types) {
         for (const command of commands) {
             const { info }: Command = require(`${path}/${type}/${category}/${command}`);
             commandData.push(info);
-        };
-    };
-};
+        }
+    }
+}
 
 axios({
     method: 'PUT',
@@ -30,13 +30,15 @@ axios({
         'Content-Type': 'application/json',
         Authorization: `Bot ${process.env.NODE_ENV === 'production' ? process.env.PROD_BOT_TOKEN : process.env.BOT_TOKEN}`
     }
-}).then((res) => {
-    if (res.status === 200) {
-        return console.log(`Successfully published all application commands to client ${config.get('client.id')}`);
-    } else {
-        return console.log('An unexpected error has occured.');
-    };
-}).catch((err) => {
-    console.log('An unexpected error has occured.');
-    console.error(err.response.data);
-});
+})
+    .then((res) => {
+        if (res.status === 200) {
+            return console.log(`Successfully published all application commands to client ${config.get('client.id')}`);
+        } else {
+            return console.log('An unexpected error has occured.');
+        }
+    })
+    .catch((err) => {
+        console.log('An unexpected error has occured.');
+        console.error(err.response.data);
+    });

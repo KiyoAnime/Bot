@@ -1,6 +1,6 @@
-import Client from "@/Client";
-import Command from "@/interfaces/Command";
-import { readdirSync } from "fs";
+import Client from '@/Client';
+import Command from '@/interfaces/Command';
+import { readdirSync } from 'fs';
 import { grey as gr, green as g } from 'chalk';
 
 export default (client: Client) => {
@@ -13,8 +13,8 @@ export default (client: Client) => {
             for (const command of commands) {
                 const cmd: Command = require(`${path}/${type}/${category}/${command}`);
                 client.commands.set(cmd.info.name, cmd);
-            };
-        };
-    };
+            }
+        }
+    }
     console.log(`${gr.bold('[')}${g.bold('HANDLER')}${gr.bold(']')} All interactions have successfully loaded.`);
 };

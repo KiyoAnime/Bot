@@ -1,7 +1,7 @@
-import { ChatCmdRun, CommandInfo } from "@/Interfaces";
-import getMember from "@/utilities/getMember";
-import axios from "axios";
-import { EmbedBuilder } from "discord.js";
+import { ChatCmdRun, CommandInfo } from '@/Interfaces';
+import getMember from '@/utilities/getMember';
+import axios from 'axios';
+import { EmbedBuilder } from 'discord.js';
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const member = await getMember(interaction, interaction.options.getMember('member'));

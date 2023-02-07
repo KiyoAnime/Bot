@@ -7,7 +7,7 @@ export default interface Command {
 }
 
 export interface CommandInfo {
-    type: 1|2|3;
+    type: 1 | 2 | 3;
     name: string;
     options?: Options[];
     description?: string;
@@ -15,13 +15,11 @@ export interface CommandInfo {
     default_member_permissions?: number;
 }
 
-type Options = {
-    type: 1|2;
+// prettier-ignore
+type Options = | {
+    type: 1 | 2;
     name: string;
     required?: boolean;
-    choices?: Choice[];
-    min_value?: number;
-    max_value?: number;
     options?: Options[];
     description: string;
     channel_types?: ChannelType[];
@@ -34,15 +32,15 @@ type Options = {
     options?: Options[];
     description: string;
     channel_types?: ChannelType[];
-    type: 1|2|3|4|5|6|7|8|9|10|11;
-}
+    type: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;
+};
 
 interface Choice {
     name: string;
-    value: string|number;
+    value: string | number;
 }
 
-type ChannelType = 0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15;
+type ChannelType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15;
 
 interface CmdRun {
     (client: Client, interaction: CommandInteraction): void;

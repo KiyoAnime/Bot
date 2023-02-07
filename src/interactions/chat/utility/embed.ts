@@ -1,7 +1,7 @@
-import { ChatCmdRun, CommandInfo } from "@/Interfaces";
-import rawEmbeds from "@/library/embeds";
-import permissions from "@/library/permissions";
-import { EmbedBuilder, TextChannel } from "discord.js";
+import { ChatCmdRun, CommandInfo } from '@/Interfaces';
+import rawEmbeds from '@/library/embeds';
+import permissions from '@/library/permissions';
+import { EmbedBuilder, TextChannel } from 'discord.js';
 
 export const run: ChatCmdRun = (client, interaction) => {
     const channel = interaction.options.getChannel('channel') as TextChannel;

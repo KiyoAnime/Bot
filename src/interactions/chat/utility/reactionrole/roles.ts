@@ -1,8 +1,19 @@
-import { ChatCmdRun } from "@/Interfaces";
-import RR from "@/models/ReactionRole";
+import { ChatCmdRun } from '@/Interfaces';
+import RR from '@/models/ReactionRole';
 import RRG from '@/models/ReactionRoleGroup';
-import { genId } from "@/utilities/gen";
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ColorResolvable, EmbedBuilder, resolveColor, SelectMenuComponentOptionData, StringSelectMenuBuilder, TextChannel } from "discord.js";
+import { genId } from '@/utilities/gen';
+import {
+    ActionRowBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    ChannelType,
+    ColorResolvable,
+    EmbedBuilder,
+    resolveColor,
+    SelectMenuComponentOptionData,
+    StringSelectMenuBuilder,
+    TextChannel
+} from 'discord.js';
 
 export const roles: ChatCmdRun = async (client, interaction) => {
     const subcommand = interaction.options.getSubcommand();
@@ -12,18 +23,20 @@ export const roles: ChatCmdRun = async (client, interaction) => {
         case 'list':
             const lRoles = await RR.find();
             if (!lRoles[0]) return interaction.reply({ content: 'There are no reaction roles.' });
+            // prettier-ignore
             interaction.reply({ embeds: [new EmbedBuilder({
                 title: 'Reaction Roles',
                 color: client.config('brand.color'),
                 description: lRoles.map((r) => { return `**ID:** ${r._id} - **Name:** ${r.name} - **Role:** <@&${r.role}>` }).join('\n'),
                 footer: { text: `${client.config('brand.name')} Utility`, icon_url: client.user?.avatarURL()! },
                 timestamp: Date.now()
-            })] });
+            })]});
             break;
 
         case 'view':
             const vRole = await RR.findById(id);
             if (!vRole) return interaction.reply({ content: 'The specified reaction role does not exist.' });
+            // prettier-ignore
             interaction.reply({ embeds: [new EmbedBuilder({
                 title: `${vRole.name} (${vRole._id})`,
                 color: client.config('brand.color'),
@@ -33,11 +46,11 @@ export const roles: ChatCmdRun = async (client, interaction) => {
                 ],
                 footer: { text: `${client.config('brand.name')} Utility` },
                 timestamp: Date.now()
-            })] });
+            })]});
             break;
 
         case 'create':
-            if (!await RRG.exists({ _id: interaction.options.getInteger('group') })) return interaction.reply({ content: 'The specified group does not exist.' });
+            if (!(await RRG.exists({ _id: interaction.options.getInteger('group') }))) return interaction.reply({ content: 'The specified group does not exist.' });
             const cId = genId();
             const cRole = await RR.create({
                 _id: cId,
@@ -51,7 +64,7 @@ export const roles: ChatCmdRun = async (client, interaction) => {
             break;
 
         case 'delete':
-            if (!await RR.exists({ _id: id })) return interaction.reply({ content: 'The specified reaction role does not exist.' });
+            if (!(await RR.exists({ _id: id }))) return interaction.reply({ content: 'The specified reaction role does not exist.' });
             const cancelBtn = new ButtonBuilder({ customId: 'btn.rr.cancel', label: 'Cancel', style: ButtonStyle.Secondary });
             const continueBtn = new ButtonBuilder({ customId: 'btn.rr.continue', label: 'Continue', style: ButtonStyle.Danger });
             const dRow = new ActionRowBuilder<ButtonBuilder>({ components: [continueBtn, cancelBtn] });
@@ -83,21 +96,26 @@ export const roles: ChatCmdRun = async (client, interaction) => {
             const components: SelectMenuComponentOptionData[] = [];
             for (const role of oRoles) {
                 components.push({ label: role.name, emoji: role.emoji, description: role.description, value: `rr.role.${role._id}` });
-            };
+            }
+            // prettier-ignore
             const oRow = new ActionRowBuilder<StringSelectMenuBuilder>({ components: [new StringSelectMenuBuilder({
                 customId: `rr.group.${oGroup._id}`,
                 options: components,
                 minValues: 1,
                 maxValues: multiple ? components.length : 1
             })]});
-            await (channel as TextChannel).send({ components: [oRow], embeds: [new EmbedBuilder({
-                title: oGroup.name,
-                color: resolveColor(oGroup.color as ColorResolvable),
-                description: oGroup.description,
-                footer: { text: `${client.config('brand.name')} Utility`, icon_url: client.user?.avatarURL()! },
-                timestamp: Date.now()
-            })]});
-            await interaction.followUp({ content: 'Successfully sent embed.' });
+            // prettier-ignore
+            await (channel as TextChannel).send({
+                components: [oRow],
+                embeds: [new EmbedBuilder({
+                    title: oGroup.name,
+                    color: resolveColor(oGroup.color as ColorResolvable),
+                    description: oGroup.description,
+                    footer: { text: `${client.config('brand.name')} Utility`, icon_url: client.user?.avatarURL()! },
+                    timestamp: Date.now()
+                })]
+            });
+            interaction.followUp({ content: 'Successfully sent embed.' });
             break;
-    };
+    }
 };

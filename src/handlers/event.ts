@@ -1,10 +1,10 @@
-import Client from "@/Client";
-import clientReady from "@/events/clientReady";
-import guildMemberAdd from "@/events/guildMemberAdd";
-import interactionCreate from "@/events/interactionCreate";
-import { Events, Message } from "discord.js";
+import Client from '@/Client';
+import clientReady from '@/events/clientReady';
+import guildMemberAdd from '@/events/guildMemberAdd';
+import interactionCreate from '@/events/interactionCreate';
+import { Events, Message } from 'discord.js';
 import { grey as gr, green as g } from 'chalk';
-import { messageDelete, messageUpdate } from "@/events/logs";
+import { messageDelete, messageUpdate } from '@/events/logs';
 
 export default (client: Client) => {
     client.on(Events.ClientReady, () => clientReady(client));

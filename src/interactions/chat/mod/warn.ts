@@ -1,7 +1,7 @@
-import { ChatCmdRun, CommandInfo } from "@/Interfaces";
-import infraction from "@/library/infraction";
-import permissions from "@/library/permissions";
-import getMember from "@/utilities/getMember";
+import { ChatCmdRun, CommandInfo } from '@/Interfaces';
+import infraction from '@/library/infraction';
+import permissions from '@/library/permissions';
+import getMember from '@/utilities/getMember';
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const member = await getMember(interaction, interaction.options.getMember('member'));

@@ -1,5 +1,5 @@
-import Client from "@/Client";
-import { ChatInputCommandInteraction } from "discord.js";
+import Client from '@/Client';
+import { ChatInputCommandInteraction } from 'discord.js';
 
 export default (client: Client, interaction: ChatInputCommandInteraction) => {
     const cmd = client.commands.get(interaction.commandName);

@@ -1,7 +1,7 @@
-import Client from "@/Client";
-import Infraction from "@/models/Infraction";
-import { genId } from "@/utilities/gen";
-import { ColorResolvable, EmbedBuilder, resolveColor, TextChannel, User } from "discord.js";
+import Client from '@/Client';
+import Infraction from '@/models/Infraction';
+import { genId } from '@/utilities/gen';
+import { ColorResolvable, EmbedBuilder, resolveColor, TextChannel, User } from 'discord.js';
 
 interface Data {
     type: Type;
@@ -11,7 +11,7 @@ interface Data {
     duration?: string;
 }
 
-type Type = 'BAN'|'WARN'|'KICK'|'TIMEOUT'|'SOFT-BAN';
+type Type = 'BAN' | 'WARN' | 'KICK' | 'TIMEOUT' | 'SOFT-BAN';
 
 export default async (client: Client, data: Data): Promise<number> => {
     const id = genId();
@@ -25,7 +25,10 @@ export default async (client: Client, data: Data): Promise<number> => {
     });
     const guild = client.guilds.cache.get(client.config('guild'));
     const logsEmbed = new EmbedBuilder({
-        author: { name: `Infraction | ${data.type.toLowerCase().charAt(0).toUpperCase() + data.type.toLowerCase().slice(1)} | ${inf._id}`, icon_url: data.user.displayAvatarURL({ forceStatic: true }) },
+        author: {
+            name: `Infraction | ${data.type.toLowerCase().charAt(0).toUpperCase() + data.type.toLowerCase().slice(1)} | ${inf._id}`,
+            icon_url: data.user.displayAvatarURL({ forceStatic: true })
+        },
         color: resolveColor(getColor(data.type) as ColorResolvable),
         fields: [
             { name: 'User:', value: `<@!${data.user.id}> (${data.user.id})`, inline: true },
@@ -59,12 +62,12 @@ function getColor(type: Type): string {
     return type.replace(regex, (matched) => {
         return colors[matched as Type];
     });
-};
+}
 
 function getTitle(type: Type): string {
     const titles = { BAN: 'banned', WARN: 'warned', KICK: 'kicked', TIMEOUT: 'timed-out', 'SOFT-BAN': 'soft-banned' };
     const regex = new RegExp(Object.keys(titles).join('|'), 'gi');
     return type.replace(regex, (matched) => {
         return titles[matched as Type];
-    })
-};
+    });
+}

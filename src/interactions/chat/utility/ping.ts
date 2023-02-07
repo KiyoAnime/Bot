@@ -1,5 +1,5 @@
-import { ChatCmdRun, CommandInfo } from "@/Interfaces";
-import { EmbedBuilder } from "discord.js";
+import { ChatCmdRun, CommandInfo } from '@/Interfaces';
+import { EmbedBuilder } from 'discord.js';
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const appPing = Date.now() - interaction.createdTimestamp;

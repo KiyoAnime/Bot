@@ -1,8 +1,8 @@
-import { ChatCmdRun, CommandInfo } from "@/Interfaces";
-import infraction from "@/library/infraction";
-import permissions from "@/library/permissions";
-import getMember from "@/utilities/getMember";
-import ms from "ms";
+import { ChatCmdRun, CommandInfo } from '@/Interfaces';
+import infraction from '@/library/infraction';
+import permissions from '@/library/permissions';
+import getMember from '@/utilities/getMember';
+import ms from 'ms';
 
 export const run: ChatCmdRun = async (client, interaction) => {
     const member = await getMember(interaction, interaction.options.getMember('member'));
@@ -52,4 +52,4 @@ export const info: CommandInfo = {
             description: 'Reason for the timeout.'
         }
     ]
-}
+};
